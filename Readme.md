@@ -19,6 +19,6 @@ cd  survivors-robot-apocalypse
 mvn clean package
 java -jar target/robot-apocalypse-1.0.0.jar
 ```
-
+Access the app on ; your-ip:8080/swagger-ui/index.html
 
 
