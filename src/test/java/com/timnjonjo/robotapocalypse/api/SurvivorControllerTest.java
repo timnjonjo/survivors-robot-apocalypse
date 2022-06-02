@@ -56,7 +56,7 @@ class SurvivorControllerTest {
 
         SurvivorData survivor = SurvivorData.builder()
                 .fullname("Sir Njonjo")
-                .gender("Female")
+                .gender("Male")
                 .nationalId("30015987")
                 .resources(List.of(SurvivorResourceData.builder().name("Food").quantity("One Bag").build()))
                 .lastLocation(new Location(BigDecimal.valueOf(20.7), BigDecimal.valueOf(20.7)))
@@ -72,7 +72,7 @@ class SurvivorControllerTest {
     void reportSurvivorContamination() throws Exception {
         SurvivorData survivorData = SurvivorData.builder()
                 .fullname("Sir Njonjo")
-                .gender("Female")
+                .gender("Male")
                 .nationalId("30015987")
                 .resources(List.of(SurvivorResourceData.builder().name("Food").quantity("One Bag").build()))
                 .lastLocation(new Location(BigDecimal.valueOf(20.7), BigDecimal.valueOf(20.7)))
@@ -96,16 +96,14 @@ class SurvivorControllerTest {
     void updateSurvivorLocation() throws Exception {
         SurvivorData survivorData = SurvivorData.builder()
                 .fullname("Sir Njonjo")
-                .gender("Female")
+                .gender("Male")
                 .nationalId("30015987")
                 .resources(List.of(SurvivorResourceData.builder().name("Food").quantity("One Bag").build()))
                 .lastLocation(new Location(BigDecimal.valueOf(20.7), BigDecimal.valueOf(20.7)))
                 .build();
         Survivor survivor = this.repository.save(survivorData.transform());
-
         BigDecimal latitude = BigDecimal.valueOf(47.58777);
         BigDecimal longitude = BigDecimal.valueOf(30.58777);
-
         mockMvc.perform(post("/v1/api/survivor/update-location")
                         .contentType("application/json")
                         .content(mapper.writeValueAsString(new UpdateLocationRequest(survivor.getId(), latitude, longitude))))
@@ -115,6 +113,5 @@ class SurvivorControllerTest {
         assertNotNull(survivor);
         assertEquals(latitude, survivor.getLastLocation().getLatitude() );
         assertEquals(longitude, survivor.getLastLocation().getLongitude() );
-
     }
 }
