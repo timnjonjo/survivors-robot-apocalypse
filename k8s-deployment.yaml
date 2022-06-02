@@ -1,0 +1,45 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: robot-apocalypse
+  name: robot-apocalypse-deployment
+  namespace: project-survivors
+spec:
+  selector:
+    matchLabels:
+      app: robot-apocalypse
+  replicas: 1
+  minReadySeconds: 15
+  template:
+    metadata:
+      labels:
+        app: robot-apocalypse
+    spec:
+      containers:
+        - name: robot-apocalypse
+          image: ImageName
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: ROBOT_CPU_URL
+              value: https://robotstakeover20210903110417.azurewebsites.net/robotcpu
+---
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: robot-apocalypse-service
+  namespace: project-survivors
+  labels:
+    run: robot-apocalypse-service
+spec:
+  type: NodePort
+  ports:
+    - name: robot-apocalypse-port
+      port: 8080
+      protocol: TCP
+  selector:
+    app: robot-apocalypse
