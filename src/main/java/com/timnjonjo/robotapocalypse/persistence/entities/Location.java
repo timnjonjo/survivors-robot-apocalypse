@@ -1,5 +1,6 @@
 package com.timnjonjo.robotapocalypse.persistence.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Embeddable;
 import java.math.BigDecimal;
 
@@ -9,7 +10,9 @@ import java.math.BigDecimal;
  */
 @Embeddable
 public class Location {
+    @Column(precision = 10, scale = 5)
     private BigDecimal latitude;
+    @Column(precision = 10, scale = 5)
     private BigDecimal longitude;
 
     public Location() {

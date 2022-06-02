@@ -23,4 +23,13 @@ public class UpdateLocationRequest {
     @NotNull(message = "Latitude Cannot be null.")
     @Range(min = -90, max = 90, message = "Longitude must be in the range -180 and +180.")
     private BigDecimal longitude;
+
+    public UpdateLocationRequest() {
+    }
+
+    public UpdateLocationRequest(Long survivorId, BigDecimal latitude, BigDecimal longitude) {
+        this.survivorId = survivorId;
+        this.latitude = latitude;
+        this.longitude = longitude;
+    }
 }
